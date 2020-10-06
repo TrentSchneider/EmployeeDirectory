@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm";
-import ResultList from "./ResultList";
+import FilterForm from "./FilterForm";
+import Card from "./Card";
 import API from "../utils/API";
 
-class SearchResultContainer extends Component {
+class FilterData extends Component {
   state = {
     filter: "",
     results: []
@@ -11,10 +11,10 @@ class SearchResultContainer extends Component {
 
   // When this component mounts, search the API for employees
   componentDidMount() {
-    this.filterEmp();
+    this.getEmp();
   }
 
-  filterEmp = () => {
+  getEmp = () => {
     API.search()
       .then(res => this.setState({ results: res.data.data }))
       .catch(err => console.log(err));
@@ -28,24 +28,31 @@ class SearchResultContainer extends Component {
     });
   };
 
-//   // When the form is submitted, search the Giphy API for `this.state.search`
-//   handleFormSubmit = event => {
-//     event.preventDefault();
-//     this.searchGiphy(this.state.search);
-//   };
+  //   // When the form is submitted, search the Giphy API for `this.state.search`
+  //   handleFormSubmit = event => {
+  //     event.preventDefault();
+  //     this.searchGiphy(this.state.search);
+  //   };
 
   render() {
     return (
       <div>
-        <SearchForm
-          search={this.state.search}
-        //   handleFormSubmit={this.handleFormSubmit}
+        <FilterForm
+          filter={this.state.filter}
+          //   handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.results} />
+        {results
+          .filter(
+            (firstName, lastName) =>
+              firstName.includes(filter) || lastName.includes(filter)
+          )
+          .map(filtered => (
+            <Card results={filtered} />
+          ))}
       </div>
     );
   }
 }
 
-export default SearchResultContainer;
+export default FilterData;
