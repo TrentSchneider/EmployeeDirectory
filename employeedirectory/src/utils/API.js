@@ -1,12 +1,27 @@
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import APIKEY from "./APIKey"
+import APP_ID from "./APPID"
 
-const BASEURL = "https://dummyapi.io/data/api/";
+const BASE_URL = 'https://dummyapi.io/data/api';
 
+const API = () => {
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
 
-// Export an object with a "search" method that searches the Giphy API for the passed query
-export default {
-  search: function(query) {
-    return axios.get(BASEURL + query + APIKEY);
-  }
+    useEffect(() => {
+        setLoading(true);
+        axios.get(`${BASE_URL}/user`, { headers: { 'app-id': APP_ID } })
+            .then(({ data }) => setData(data))
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, []);
+
+    return (
+        <div>
+           {loading && "Loading..."}
+           {JSON.stringify(data)}
+        </div>
+    );
 };
+
+export { API };
