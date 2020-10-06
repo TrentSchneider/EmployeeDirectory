@@ -33,7 +33,8 @@ class FilterData extends Component {
   //     event.preventDefault();
   //     this.searchGiphy(this.state.search);
   //   };
-
+// TODO check text filtering and mapping functions
+// TODO add button sorting for first and last name
   render() {
     return (
       <div>

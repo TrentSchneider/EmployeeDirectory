@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-
+// TODO setup onchange for inserted text
 function Card(props) {
   return (
     <div className="card">
