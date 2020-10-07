@@ -3,20 +3,24 @@ import "./style.css";
 // TODO setup onchange for inserted text
 function Card(props) {
   return (
-    <div className="card">
-      <div className="img-container">
-        <img alt={props.firstName}  src={props.picture} />
-      </div>
-      <div className="content">
-        <ul>
-          <li>
-            <strong>Name:</strong> {props.firstName} {props.lastName}
-          </li>
-          <li>
-            <strong>Email:</strong> {props.email}
-          </li>
-        </ul>
-      </div>
+    <div className="row">
+      {props.results.map(results => (
+        <div className="card">
+          <div className="img-container">
+            <img alt={results.firstName} src={results.picture} />
+          </div>
+          <div className="content">
+            <ul>
+              <li>
+                <strong>Name:</strong> {results.firstName} {results.lastName}
+              </li>
+              <li>
+                <strong>Email:</strong> {results.email}
+              </li>
+            </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
