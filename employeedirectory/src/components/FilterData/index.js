@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import FilterForm from "./FilterForm";
-import Card from "./Card";
-import API from "../utils/API";
+import FilterForm from "../FilterForm";
+import Card from "../Card";
+import API from "../../utils/API";
 
 class FilterData extends Component {
   state = {
@@ -28,14 +28,16 @@ class FilterData extends Component {
     });
   };
 
-  //   // When the form is submitted, search the Giphy API for `this.state.search`
-  //   handleFormSubmit = event => {
-  //     event.preventDefault();
-  //     this.searchGiphy(this.state.search);
-  //   };
-// TODO check text filtering and mapping functions
-// TODO add button sorting for first and last name
+  // TODO check text filtering and mapping functions
+  // TODO add button sorting for first and last name
+
   render() {
+    const emps = this.state.results.filter(
+      data =>
+        this.state.filter === "" ||
+        data.firstName.includes(this.state.filter) ||
+        data.lastName.includes(this.state.filter)
+    );
     return (
       <div>
         <FilterForm
@@ -43,14 +45,7 @@ class FilterData extends Component {
           //   handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        {results
-          .filter(
-            (firstName, lastName) =>
-              firstName.includes(filter) || lastName.includes(filter)
-          )
-          .map(filtered => (
-            <Card results={filtered} />
-          ))}
+        <Card results={emps} />
       </div>
     );
   }
