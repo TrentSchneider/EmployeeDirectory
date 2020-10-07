@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
+// import React from "react";
 import axios from "axios";
-import APP_ID from "./APPID"
+import APP_ID from "./APPID";
 
-const BASE_URL = 'https://dummyapi.io/data/api';
+const BASE_URL = "https://dummyapi.io/data/api";
 
-const API = () => {
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState(null);
-
-    useEffect(() => {
-        setLoading(true);
-        axios.get(`${BASE_URL}/user`, { headers: { 'app-id': APP_ID } })
-            .then(({ data }) => setData(data))
-            .catch(console.error)
-            .finally(() => setLoading(false));
-    }, []);
-
-    return (
-        <div>
-           {loading && "Loading..."}
-           {JSON.stringify(data)}
-        </div>
-    );
+export default {
+  search: function () {
+    return axios.get(`${BASE_URL}/user`, { headers: { "app-id": APP_ID } });
+  }
 };
-
-export { API };
