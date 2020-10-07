@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
-import FilterForm from "./components/FilterForm";
+import FilterData from "./components/FilterData";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 
@@ -10,8 +10,7 @@ class App extends Component {
     return (
       <Wrapper>
         <Title></Title>
-        <FilterForm></FilterForm>
-        <Cards></Cards>
+        <FilterData></FilterData>
       </Wrapper>
     );
   }
