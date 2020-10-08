@@ -6,7 +6,11 @@ import API from "../../utils/API";
 class FilterData extends Component {
   state = {
     filter: "",
-    results: []
+    results: [],
+    sortFirstA: false,
+    sortFirstD: false,
+    sortLastA: false,
+    sortLastD: false
   };
 
   // When this component mounts, search the API for employees
@@ -20,6 +24,53 @@ class FilterData extends Component {
       .catch(err => console.log(err));
   };
 
+  handleFirstSort = event => {
+    event.preventDefault();
+    const sorted = this.state.results;
+    if (this.state.sortFirstA === false) {
+      sorted.sort((a, b) => (a.firstName > b.firstName ? 1 : -1));
+      this.setState({
+        results: sorted,
+        sortFirstA: true,
+        sortFirstD: false,
+        sortLastA: false,
+        sortLastD: false
+      });
+    } else if (this.state.sortFirstD === false) {
+      sorted.sort((a, b) => (a.firstName > b.firstName ? -1 : 1));
+      this.setState({
+        results: sorted,
+        sortFirstA: false,
+        sortFirstD: true,
+        sortLastA: false,
+        sortLastD: false
+      });
+    }
+  };
+  handleLastSort = event => {
+    event.preventDefault();
+    const sorted = this.state.results;
+    if (this.state.sortLastA === false) {
+      sorted.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
+      this.setState({
+        results: sorted,
+        sortFirstA: false,
+        sortFirstD: false,
+        sortLastA: true,
+        sortLastD: false
+      });
+    } else if (this.state.sortLastD === false) {
+      sorted.sort((a, b) => (a.lastName > b.lastName ? -1 : 1));
+      this.setState({
+        results: sorted,
+        sortFirstA: false,
+        sortFirstD: false,
+        sortLastA: false,
+        sortLastD: true
+      });
+    }
+  };
+
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -28,7 +79,6 @@ class FilterData extends Component {
     });
   };
 
-  // TODO check text filtering and mapping functions
   // TODO add button sorting for first and last name
 
   render() {
@@ -42,10 +92,19 @@ class FilterData extends Component {
       <div>
         <FilterForm
           filter={this.state.filter}
-          //   handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
+          handleFirstSort={this.handleFirstSort}
+          handleLastSort={this.handleLastSort}
+          sortFirstA={this.state.sortFirstA}
+          sortFirstD={this.state.sortFirstD}
+          sortLastA={this.state.sortLastA}
+          sortLastD={this.state.sortLastD}
         />
-        <Card results={emps} />
+        <div className="row">
+          {emps.map(results => (
+            <Card results={results} key={results.id} />
+          ))}
+        </div>
       </div>
     );
   }
