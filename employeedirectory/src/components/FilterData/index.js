@@ -82,11 +82,12 @@ class FilterData extends Component {
   // TODO add button sorting for first and last name
 
   render() {
+    const lowerFilter = this.state.filter.toLowerCase();
     const emps = this.state.results.filter(
       data =>
         this.state.filter === "" ||
-        data.firstName.includes(this.state.filter) ||
-        data.lastName.includes(this.state.filter)
+        data.firstName.toLowerCase().includes(lowerFilter) ||
+        data.lastName.toLowerCase().includes(lowerFilter)
     );
     return (
       <div>
