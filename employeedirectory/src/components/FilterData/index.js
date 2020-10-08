@@ -101,7 +101,7 @@ class FilterData extends Component {
           sortLastA={this.state.sortLastA}
           sortLastD={this.state.sortLastD}
         />
-        <div className="row">
+        <div className="row d-flex justify-content-around">
           {emps.map(results => (
             <Card results={results} key={results.id} />
           ))}

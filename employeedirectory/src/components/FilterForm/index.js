@@ -35,15 +35,20 @@ function FilterForm(props) {
           placeholder="Filter Employees"
           id="filter"
         />
-        <button
-          onClick={props.handleFirstSort}
-          className="btn btn-primary mt-3"
-        >
-          Sort First Name {arrowF(props.sortFirstA, props.sortFirstD)}
-        </button>
-        <button onClick={props.handleLastSort} className="btn btn-primary mt-3">
-          Sort Last Name {arrowL(props.sortLastA, props.sortLastD)}
-        </button>
+        <div className="d-flex justify-content-center">
+          <button
+            onClick={props.handleFirstSort}
+            className="btn btn-primary mt-3 mx-1"
+          >
+            Sort First Name {arrowF(props.sortFirstA, props.sortFirstD)}
+          </button>
+          <button
+            onClick={props.handleLastSort}
+            className="btn btn-primary mt-3 mx-1"
+          >
+            Sort Last Name {arrowL(props.sortLastA, props.sortLastD)}
+          </button>
+        </div>
       </div>
     </form>
   );
