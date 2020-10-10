@@ -2,8 +2,8 @@ import React from "react";
 import UpArrow from "../UpArrow";
 import DownArrow from "../DownArrow";
 
-// look up turnary sintax for arrow functions to return svg files
 function FilterForm(props) {
+  // shows arrows on button when sorting using first name
   function arrowF(ascend, desc) {
     if (ascend) {
       return <UpArrow />;
@@ -13,6 +13,7 @@ function FilterForm(props) {
       return "";
     }
   }
+    // shows arrows on button when sorting using last name
   function arrowL(ascend, desc) {
     if (ascend) {
       return <UpArrow />;
@@ -22,6 +23,8 @@ function FilterForm(props) {
       return "";
     }
   }
+  
+  // returns the user filter form and sorting buttons
   return (
     <form>
       <div className="form-group">

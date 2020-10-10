@@ -1,5 +1,6 @@
 import React from "react";
 
+// returns the up arrow for sorting buttons
 function UpArrow() {
   return (
     <svg

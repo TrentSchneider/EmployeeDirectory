@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
-// TODO setup onchange for inserted text
+
+// returns the a card for each user with their information filled in
 function Card(props) {
   return (
     <div className="card">

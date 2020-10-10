@@ -1,5 +1,6 @@
 import React from "react";
 
+// returns the down arrow for sorting buttons
 function DownArrow() {
   return (
     <svg

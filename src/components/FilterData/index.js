@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FilterForm from "../FilterForm";
 import Card from "../Card";
 import API from "../../utils/API";
+import Data from "./dummyData.json";
 
 class FilterData extends Component {
   state = {
@@ -13,17 +14,24 @@ class FilterData extends Component {
     sortLastD: false
   };
 
-  // When this component mounts, search the API for employees
+  // When this component mounts, employee data is retrieved
+  // API is used when api key can be hiddne and dummy data is used otherwise
   componentDidMount() {
-    this.getEmp();
+    this.getDummy();
   }
-
+  // pulls dummy data for employees using example json
+  getDummy = () => {
+    this.setState({ results: Data });
+  };
+  // pulls dummy data for employees using API
   getEmp = () => {
     API.search()
-      .then(res => this.setState({ results: res.data.data }))
+      .then(res => {
+        this.setState({ results: res.data.data });
+      })
       .catch(err => console.log(err));
   };
-
+  // handles sorting by first name
   handleFirstSort = event => {
     event.preventDefault();
     const sorted = this.state.results;
@@ -47,6 +55,7 @@ class FilterData extends Component {
       });
     }
   };
+  // handles sorting by last name
   handleLastSort = event => {
     event.preventDefault();
     const sorted = this.state.results;
@@ -70,7 +79,7 @@ class FilterData extends Component {
       });
     }
   };
-
+  // handles imput changes
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -78,17 +87,17 @@ class FilterData extends Component {
       [name]: value
     });
   };
-
-  // TODO add button sorting for first and last name
-
+  // renders the form and each card
   render() {
     const lowerFilter = this.state.filter.toLowerCase();
-    const emps = this.state.results.filter(
-      data =>
+    // filters array as the user types
+    const emps = this.state.results.filter(data => {
+      return (
         this.state.filter === "" ||
         data.firstName.toLowerCase().includes(lowerFilter) ||
         data.lastName.toLowerCase().includes(lowerFilter)
-    );
+      );
+    });
     return (
       <div>
         <FilterForm
